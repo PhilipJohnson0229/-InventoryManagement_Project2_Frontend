@@ -26,7 +26,7 @@ export const Stores = () => {
         <Card.Body>
           <Card.Title>{cardInfo.name}</Card.Title>
           <Card.Text>{cardInfo.location}</Card.Text>
-          <Button onClick={() => navigate("/table")} style={{width: 300, alignSelf: 'center', justifyContent: 'inherit', marginBottom: 50}} variant= 'info'>Check your status</Button>
+          <Button onClick={() => navigate("/table")} style={{width: 300, alignSelf: 'center', justifyContent: 'inherit', marginBottom: 50, color:'white'}} variant= 'info'>See Inventory</Button>
         </Card.Body>
       </Card>
     );
@@ -35,4 +35,3 @@ export const Stores = () => {
   return <div className="grid">{cardInfo.map(renderCard)}</div>;
 };
 
-export default Stores;

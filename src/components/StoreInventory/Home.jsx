@@ -9,9 +9,9 @@ export const Home = () => {
         // This is how to read environment variables
         // Environment variables are good to toggle between different environments (dev, prod, test, QA)
         <>
-            <Container className="text-center" style ={{paddingTop : 30, alignContent: 'center', backgroundColor:'lightgray'}}>
+            <Container className="text-center" style ={{paddingTop : 30, alignContent: 'center'}}>
                
-                    <Card bg="success" className="mb-3 text-center" style={{color:'black'}}>
+                    <Card bg="success" className="mb-3 text-center" style={{color:'white'}}>
                     <Card.Body>
                     <Card.Img src="https://www.helium10.com/app/uploads/2020/09/InventoryManagement_Hero@3x.png" resizeMode="cover" style ={{width:600, height : 500}} />
                     </Card.Body> 

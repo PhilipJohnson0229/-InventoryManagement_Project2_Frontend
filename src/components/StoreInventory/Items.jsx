@@ -22,7 +22,7 @@ export const Items = () => {
     return (
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
-    <Card variant='info' style={{width: '100%', color:'white'}}>
+    <Card variant='dark' style={{width: '100%', color:'white'}}>
     <Table striped bordered hover size="sm" variant='info' responsive>
         <thead>
             <tr>
