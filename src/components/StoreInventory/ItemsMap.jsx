@@ -48,10 +48,10 @@ export const ItemsMap = ({e, setTable}) => {
     return (
     <tr> 
         <td>{e.id}</td>
-        <td>{e.name}</td>
-        <td>{e.price}</td>
-        <td>{e.store}</td>
-        <td>{e.category}</td>
+        <td>{e.Name}</td>
+        <td>{e.Price}</td>
+        <td>{e.store_id}</td>
+        <td>{e.category_id}</td>
         <td>
         <Button onClick={handleEdit} variant='secondary'>Edit</Button>
         <Button onClick={handleDelete} variant='dark'>Delete</Button>
