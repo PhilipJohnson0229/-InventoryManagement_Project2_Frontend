@@ -23,6 +23,7 @@ export const Items = () => {
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
     <Card variant='dark' style={{width: '100%', color:'white'}}>
+    
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic">
         Category

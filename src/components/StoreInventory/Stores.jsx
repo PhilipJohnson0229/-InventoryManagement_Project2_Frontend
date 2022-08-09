@@ -12,7 +12,7 @@ export const Stores = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/store/`)
+        axios.get(`http://localhost:8080/getStores`)
         .then((response) => {console.log(response.data) 
             setCardInfo(response.data)})
         .catch((err) => {console.log(err)})
