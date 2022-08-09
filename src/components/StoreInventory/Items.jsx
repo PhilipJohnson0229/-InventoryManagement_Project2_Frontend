@@ -12,7 +12,7 @@ export const Items = () => {
 
     // retrieves table
     useEffect(() => {
-        axios.get(`http://localhost:8080/getItems?page=0`)
+        axios.get(`http://localhost:8080/getItems`)
         .then((response) => {console.log(response.data) 
             setTable(response.data)})
         .catch((err) => {console.log(err)})
