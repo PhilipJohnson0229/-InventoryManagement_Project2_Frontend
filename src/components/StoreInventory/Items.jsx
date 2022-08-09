@@ -4,7 +4,7 @@ import { Container, Table, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemsMap } from './ItemsMap';
 import { useState, useEffect } from 'react';
-
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export const Items = () => {
 
@@ -12,7 +12,7 @@ export const Items = () => {
 
     // retrieves table
     useEffect(() => {
-        axios.get(`http://localhost:8080/getItems`)
+        axios.get(`http://localhost:8080/getItems?page=0`)
         .then((response) => {console.log(response.data) 
             setTable(response.data)})
         .catch((err) => {console.log(err)})
@@ -23,6 +23,18 @@ export const Items = () => {
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
     <Card variant='dark' style={{width: '100%', color:'white'}}>
+    <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+        Category
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+    
     <Table striped bordered hover size="sm" variant='info' responsive>
         <thead>
             <tr>
