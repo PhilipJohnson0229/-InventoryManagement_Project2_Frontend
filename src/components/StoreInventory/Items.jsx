@@ -25,7 +25,7 @@ export const Items = () => {
     <Card variant='dark' style={{width: '100%', color:'white'}}>
     
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <Dropdown.Toggle variant="success" id="dropdown-basic" >
         Category
       </Dropdown.Toggle>
 
@@ -48,6 +48,7 @@ export const Items = () => {
             </tr>
         </thead>
         <tbody>
+            
             {table.map((e) =>(
                 <ItemsMap e={e} setTable={setTable} /> 
                     

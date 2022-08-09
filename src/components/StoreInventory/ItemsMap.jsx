@@ -51,8 +51,8 @@ export const ItemsMap = ({e, setTable}) => {
         <td>{e.id}</td>
         <td>{e.name}</td>
         <td>{e.price}</td>
-        <td>{e.store_id}</td>
-        <td>{e.category_id}</td>
+        <td>{e.store.name}</td>
+        <td>{e.category.name}</td>
         <td>
         <Button onClick={handleEdit} variant='secondary'>Edit</Button>
         <Button onClick={handleDelete} variant='dark'>Delete</Button>
