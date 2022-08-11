@@ -34,7 +34,27 @@ export const Items = () => {
  
     let query = "";
 
+    // filters table rows according to user input
     const searchResult = (e) => {
+        //using cardInfo.name property, change query value : query = storeName;
+        query = e.target.value; 
+        console.log("category: ", table);
+        if(query === "") { // checks if query is null
+            table.map((value) => { // if true, return paged table
+               return value;
+            })
+            setResult(table);
+        } else { // if false, filter through ALL table values
+            const currentResults = allTable.filter((search) => {
+                    return search.store.name.toString().toLowerCase().includes(query);
+            })
+            console.log("search results: ", currentResults);
+            setResult(currentResults);
+        }
+
+    }
+
+    const searchResultCategory = (e) => {
         //using cardInfo.name property, change query value : query = storeName;
         query = e.target.value; 
         console.log("sdata: ", table);
@@ -45,7 +65,7 @@ export const Items = () => {
             setResult(table);
         } else { // if false, filter through ALL table values
             const currentResults = allTable.filter((search) => {
-                    return search.store.name.toString().toLowerCase().includes(query);
+                    return search.category.name.toString().toLowerCase().includes(query);
             })
             console.log("search results: ", currentResults);
             setResult(currentResults);
@@ -62,26 +82,15 @@ export const Items = () => {
     return (
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
-    <input type="text" id="myInput" onChange={searchResult} placeholder="Search for store names.."></input>
-
-    <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-Category" >
-        Category
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Masonry</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Ornamental Railings</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Drywall & Acoustical (MOB)</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <input type="text" id="storeInput" onChange={searchResult} placeholder="Search for store names.."></input>
+    <input type="text" id="categoryInput" onChange={searchResultCategory} placeholder="Search for category names.."></input>
 
     <Card variant='dark' style={{width: '100%', color:'white'}}>
     <Table striped bordered hover size="sm" id="myTable" variant='info' responsive>
         <thead>
             <tr>
                 <td>ID</td>
-                <td>Name</td>
+                <td>Item</td>
                 <td>Price</td>
                 <td>Store</td>
                 <td>Category</td>

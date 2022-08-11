@@ -11,8 +11,8 @@ import{Button} from 'react-bootstrap';
 export const ItemsMap = ({e, setTable}) => {
 
     const handleDelete = async () => {
-        try {                                 // Need to change later
-            const s = await axios.delete(`http://localhost:8080/id=${e.id}`);
+        try {                                 // Need to test 
+            const s = await axios.delete(`http://localhost:8080/deleteItem/{id}`);
              setTable(e.filter((table) => {return e.id !== table.id}));
          }
          catch (err) {
