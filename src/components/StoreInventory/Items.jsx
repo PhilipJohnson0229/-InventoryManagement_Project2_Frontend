@@ -9,6 +9,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 export const Items = () => {
 
     const [table, setTable] = useState([]);
+    const [data, setData] = useState([]);// for filtering items in table
 
     // retrieves table
     useEffect(() => {
@@ -18,24 +19,38 @@ export const Items = () => {
         .catch((err) => {console.log(err)})
     }, []) // every time update is changed -> useEffect hook is called again
 
+    useEffect(() => {
+        axios.get('')
+    })
  // Bare bones Items table setup, still need to alter
     return (
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
-    <Card variant='dark' style={{width: '100%', color:'white'}}>
-    
+    <Dropdown>
+      <Dropdown.Toggle variant="success" id="dropdown-basic" >
+        Store
+      </Dropdown.Toggle>
+
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/action-1">Jaxnation</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Realblab</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Wordtune</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
+
     <Dropdown>
       <Dropdown.Toggle variant="success" id="dropdown-basic" >
         Category
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Item href="#/action-1">Masonry</Dropdown.Item>
+        <Dropdown.Item href="#/action-2">Ornamental Railings</Dropdown.Item>
+        <Dropdown.Item href="#/action-3">Drywall & Acoustical (MOB)</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
-    
+
+    <Card variant='dark' style={{width: '100%', color:'white'}}>
     <Table striped bordered hover size="sm" variant='info' responsive>
         <thead>
             <tr>
