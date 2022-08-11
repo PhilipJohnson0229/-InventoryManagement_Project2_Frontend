@@ -20,8 +20,15 @@ export const Items = () => {
     }, []) // every time update is changed -> useEffect hook is called again
 
     useEffect(() => {
-        axios.get('')
-    })
+        axios.get('http://localhost:8080/getStoreItemsName?name=Jaxnation')
+        .then(response => response.data)
+        .then(responseData => {
+            setData(responseData)
+        })
+        .catch(err => {
+            console.log(err)
+        });
+    }, []);
  // Bare bones Items table setup, still need to alter
     return (
     <>
