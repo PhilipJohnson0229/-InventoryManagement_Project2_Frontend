@@ -19,16 +19,30 @@ export const Items = () => {
         .catch((err) => {console.log(err)})
     }, []) // every time update is changed -> useEffect hook is called again
 
-    useEffect(() => {
-        axios.get('http://localhost:8080/getStoreItemsName?name=Jaxnation')
-        .then(response => response.data)
-        .then(responseData => {
-            setData(responseData)
-        })
-        .catch(err => {
-            console.log(err)
-        });
-    }, []);
+    // Declare variables
+    var input, filter, tr, td, i, txtValue;
+    input = document.getElementsByClassName(e.store.name);
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        } else {
+        tr[i].style.display = "none";
+        }
+    }
+    }
+    /*
+    const filterTable = (name) => {
+        data.filterTable
+    } */
+
  // Bare bones Items table setup, still need to alter
     return (
     <>
@@ -39,7 +53,7 @@ export const Items = () => {
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Jaxnation</Dropdown.Item>
+        <Dropdown.Item href="#http://localhost:8080/getStoreItemsName?name=Jaxnation">Jaxnation</Dropdown.Item>
         <Dropdown.Item href="#/action-2">Realblab</Dropdown.Item>
         <Dropdown.Item href="#/action-3">Wordtune</Dropdown.Item>
       </Dropdown.Menu>
