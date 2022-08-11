@@ -8,59 +8,64 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 export const Items = () => {
 
-    const [table, setTable] = useState([]);
-    const [data, setData] = useState([]);// for filtering items in table
+    const [table, setTable] = useState([]); // maps table
+    const [allTable, setAllTable] = useState([]);
+    //stores the search result
+    const [result, setResult] = useState(table);
+    const [page, setPage] = useState(0);
+
+
 
     // retrieves table
     useEffect(() => {
-        axios.get(`http://localhost:8080/getItems?page=0`)
-        .then((response) => {console.log(response.data) 
-            setTable(response.data)})
-        .catch((err) => {console.log(err)})
-    }, []) // every time update is changed -> useEffect hook is called again
+        axios.all([ // calls each .get() below
+        axios.get(`http://localhost:8080/getItems?page=${page}`), // tables that takes in pagination - page
+        axios.get(`http://localhost:8080/getAll`)]).then(axios.spread((getItems, getAll) => { // 'getAll' 
+            setTable(getItems.data); // store the data
+            setAllTable(getAll.data);
+            console.log("paged items: ", getItems.data, "all items: ", getAll.data); // test if receives data
+        }))
+}, [page]) // every time update is changed -> useEffect hook is called again
 
-    // Declare variables
-    var input, filter, tr, td, i, txtValue;
-    input = document.getElementsByClassName(e.store.name);
-    filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
-    tr = table.getElementsByTagName("tr");
+    // result allows to render entire table pagination at beginning/refresh
+    useEffect(() => { 
+     setResult(table);
+    }, [table])
+ 
+    let query = "";
 
-    // Loop through all table rows, and hide those who don't match the search query
-    for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-        txtValue = td.textContent || td.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-        } else {
-        tr[i].style.display = "none";
+    const searchResult = (e) => {
+        //using cardInfo.name property, change query value : query = storeName;
+        query = e.target.value; 
+        console.log("sdata: ", table);
+        if(query === "") { // checks if query is null
+            table.map((value) => { // if true, return paged table
+               return value;
+            })
+            setResult(table);
+        } else { // if false, filter through ALL table values
+            const currentResults = allTable.filter((search) => {
+                    return search.store.name.toString().toLowerCase().includes(query);
+            })
+            console.log("search results: ", currentResults);
+            setResult(currentResults);
         }
+
     }
+
+  
+    const updatePage = (page) => { // updates pagination
+        setPage(page);
     }
-    /*
-    const filterTable = (name) => {
-        data.filterTable
-    } */
 
  // Bare bones Items table setup, still need to alter
     return (
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
-    <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic" >
-        Store
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#http://localhost:8080/getStoreItemsName?name=Jaxnation">Jaxnation</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Realblab</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Wordtune</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+    <input type="text" id="myInput" onChange={searchResult} placeholder="Search for store names.."></input>
 
     <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic" >
+      <Dropdown.Toggle variant="success" id="dropdown-Category" >
         Category
       </Dropdown.Toggle>
 
@@ -72,7 +77,7 @@ export const Items = () => {
     </Dropdown>
 
     <Card variant='dark' style={{width: '100%', color:'white'}}>
-    <Table striped bordered hover size="sm" variant='info' responsive>
+    <Table striped bordered hover size="sm" id="myTable" variant='info' responsive>
         <thead>
             <tr>
                 <td>ID</td>
@@ -85,14 +90,26 @@ export const Items = () => {
         </thead>
         <tbody>
             
-            {table.map((e) =>(
+            {result.map((e) =>(
                 <ItemsMap e={e} setTable={setTable} /> 
                     
             ))}
 
         </tbody>
     </Table>
+    
     </Card>
+    <nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" >Previous</a></li>
+    {[...Array(11)].map((x, i) => {
+        return (
+            <li class="page-item"><button className="page-link" onClick={() => {updatePage(i)}}>{i+1}</button></li>
+        )
+    })}
+    <li class="page-item"><a class="page-link" >Next</a></li>
+  </ul>
+</nav>
     </Container>
     </>
     );

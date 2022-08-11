@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import standInImg from './store.png';
 import { useNavigate } from 'react-router-dom';
+//import { Link } from "react-router-dom";
 
 export const Stores = () => {
     const [cardInfo, setCardInfo] = useState([]);
