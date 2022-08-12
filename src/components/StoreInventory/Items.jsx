@@ -4,7 +4,6 @@ import { Container, Table, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemsMap } from './ItemsMap';
 import { useState, useEffect } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
 
 export const Items = () => {
 
@@ -13,8 +12,6 @@ export const Items = () => {
     //stores the search result
     const [result, setResult] = useState(table);
     const [page, setPage] = useState(0);
-
-
 
     // retrieves table
     useEffect(() => {
@@ -27,7 +24,7 @@ export const Items = () => {
         }))
 }, [page]) // every time update is changed -> useEffect hook is called again
 
-    // result allows to render entire table pagination at beginning/refresh
+    // allows to render entire table pagination at beginning/refresh
     useEffect(() => { 
      setResult(table);
     }, [table])
@@ -38,7 +35,7 @@ export const Items = () => {
     const searchResult = (e) => {
         //using cardInfo.name property, change query value : query = storeName;
         query = e.target.value; 
-        console.log("category: ", table);
+        console.log("store: ", table);
         if(query === "") { // checks if query is null
             table.map((value) => { // if true, return paged table
                return value;
@@ -54,10 +51,9 @@ export const Items = () => {
 
     }
 
-    const searchResultCategory = (e) => {
-        //using cardInfo.name property, change query value : query = storeName;
+    const searchCategoryResult = (e) => {
         query = e.target.value; 
-        console.log("sdata: ", table);
+        console.log("category: ", table);
         if(query === "") { // checks if query is null
             table.map((value) => { // if true, return paged table
                return value;
@@ -83,7 +79,7 @@ export const Items = () => {
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
     <input type="text" id="storeInput" onChange={searchResult} placeholder="Search for store names.."></input>
-    <input type="text" id="categoryInput" onChange={searchResultCategory} placeholder="Search for category names.."></input>
+    <input type="text" id="categoryInput" onChange={searchCategoryResult} placeholder="Search for category names.."></input>
 
     <Card variant='dark' style={{width: '100%', color:'white'}}>
     <Table striped bordered hover size="sm" id="myTable" variant='info' responsive>
