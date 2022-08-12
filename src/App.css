@@ -43,9 +43,15 @@ html
 }
 
 #storeInput {
-  margin: 20;
+  position: relative;
+  margin: 10px;
+  padding: 5px;
+  left: 10px;
 }
 
 #categoryInput {
-  margin: 20;
+  margin: 2px;
+  padding: 5px;
+  width: 300px;
+  
 }
