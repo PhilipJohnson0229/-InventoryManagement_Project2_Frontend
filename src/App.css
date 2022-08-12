@@ -41,9 +41,11 @@ html
     transform: rotate(360deg);
   }
 }
-.dropdown {
-  position: relative;
-  display: inline-table;
- 
+
+#storeInput {
+  margin: 20;
 }
 
+#categoryInput {
+  margin: 20;
+}
