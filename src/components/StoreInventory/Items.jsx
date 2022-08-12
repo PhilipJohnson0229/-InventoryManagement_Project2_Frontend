@@ -4,6 +4,7 @@ import { Container, Table, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemsMap } from './ItemsMap';
 import { useState, useEffect } from 'react';
+import { useLocation } from "react-router-dom";
 
 export const Items = () => {
 
@@ -12,6 +13,8 @@ export const Items = () => {
     //stores the search result
     const [result, setResult] = useState(table);
     const [page, setPage] = useState(0);
+    const location = useLocation();// for storing Store name from Store component
+    const { storeName } = location.state;
 
     // retrieves table
     useEffect(() => {
@@ -21,20 +24,32 @@ export const Items = () => {
             setTable(getItems.data); // store the data
             setAllTable(getAll.data);
             console.log("paged items: ", getItems.data, "all items: ", getAll.data); // test if receives data
+            console.log(storeName); // output: "the-page-id"
         }))
 }, [page]) // every time update is changed -> useEffect hook is called again
 
     // allows to render entire table pagination at beginning/refresh
     useEffect(() => { 
      setResult(table);
+     //searchResult();
     }, [table])
  
     let query = "";
+    
+    // checks if store link was selected and renders immediately
+    function renderStore(event, storeName){
+
+    }
 
     // filters table rows according to user input
     const searchResult = (e) => {
         //using cardInfo.name property, change query value : query = storeName;
-        query = e.target.value; 
+        if (e.target.value == "") { // checks if parameter is null
+            query = storeName.toLowerCase(); // sets query to storeName's state
+        } else {
+            query = e.target.value;
+        }
+        
         console.log("store: ", table);
         if(query === "") { // checks if query is null
             table.map((value) => { // if true, return paged table
@@ -45,7 +60,7 @@ export const Items = () => {
             const currentResults = allTable.filter((search) => {
                     return search.store.name.toString().toLowerCase().includes(query);
             })
-            console.log("search results: ", currentResults);
+            console.log("search results: ", currentResults, query);
             setResult(currentResults);
         }
 

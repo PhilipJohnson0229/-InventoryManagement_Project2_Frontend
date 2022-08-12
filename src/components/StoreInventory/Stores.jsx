@@ -4,13 +4,13 @@ import { Button, Card } from "react-bootstrap";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import standInImg from './store.png';
-import { useNavigate } from 'react-router-dom';
-//import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 
 export const Stores = () => {
     const [cardInfo, setCardInfo] = useState([]);
 
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         axios.get(`http://localhost:8080/getStores`)
@@ -18,7 +18,10 @@ export const Stores = () => {
             setCardInfo(response.data)})
         .catch((err) => {console.log(err)})
     }, []) 
-
+  
+  const handleClick = (event, param) => { // called when clicking inventory button
+    console.log(event, param); // test if receives store name
+  };
 
   const renderCard = (cardInfo, index) => {
     return (
@@ -27,7 +30,14 @@ export const Stores = () => {
         <Card.Body>
           <Card.Title>{cardInfo.name}</Card.Title>
           <Card.Text>{cardInfo.location}</Card.Text>
-          <Button onClick={() => navigate("/table")} style={{width: 300, alignSelf: 'center', justifyContent: 'inherit', marginBottom: 50, color:'white'}} variant= 'info'>See Inventory</Button>
+          <Button onClick={  () => {navigate("/table")}} style={{width: 300, alignSelf: 'center', justifyContent: 'inherit', marginBottom: 50, color:'white'}} variant= 'info'>
+            See Inventory
+          </Button>
+          <Link
+          style={{width: 300, alignSelf: 'center', justifyContent: 'inherit', marginBottom: 50, color:'white'}} variant= 'info'
+            to={'/table'}
+            state={{storeName: cardInfo.name}}
+            >Click to see Store</Link>
         </Card.Body>
       </Card>
     );
