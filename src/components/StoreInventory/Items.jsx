@@ -85,8 +85,28 @@ export const Items = () => {
         setPage(page);
     }
 
+    const [editFormData, setEditFormData] = useState({
+        "id": "",
+        "name": "",
+        "price": "",
+        "store": {
+            "id": 2,
+            "name": "",
+            "location": "3744 Loftsgordon Street"
+        },
+        "category": {
+            "id": 8,
+            "name": "",
+            "description": "Mtrcy driver injured in collision w rail trn/veh in traf"
+        }
+    })
+
     const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
 
+    const handleEditFormChange = (event) => {
+
+    }
+    
     const handeEditClick = (event, e) => {
         event.preventDefault();
         setEditItemId(e.id);
