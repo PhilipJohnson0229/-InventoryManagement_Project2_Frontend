@@ -107,8 +107,12 @@ export const Items = () => {
         <tbody>
             
             {result.map((e) =>(
-                <ItemsMap e={e} setTable={setTable} /> 
+                
+                    <Fragment> // resolves two children error
+                    <ItemsMap e={e} setTable={setTable} /> 
                     <EditableRow/>
+                    </Fragment>
+                    
             ))}
 
         </tbody>
