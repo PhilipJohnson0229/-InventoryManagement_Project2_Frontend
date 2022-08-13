@@ -93,6 +93,7 @@ export const Items = () => {
     <input type="text" id="categoryInput" onChange={searchCategoryResult} placeholder="Search for category names.."></input>
 
     <Card variant='dark' style={{width: '100%', color:'white'}}>
+    <form>
     <Table striped bordered hover size="sm" id="myTable" variant='info' responsive>
         <thead>
             <tr>
@@ -118,7 +119,7 @@ export const Items = () => {
 
         </tbody>
     </Table>
-    
+    </form>
     </Card>
     <nav aria-label="Page navigation example">
   <ul class="pagination">
