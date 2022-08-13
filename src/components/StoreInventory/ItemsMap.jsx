@@ -8,7 +8,7 @@ import{Button} from 'react-bootstrap';
   in Items.jsx and handles the button functions.
 */
 
-export const ItemsMap = ({e, setTable}) => {
+export const ItemsMap = ({e, setTable, handeEditClick}) => {
 
     const handleDelete = async () => {
         try {                                 // Need to test 
