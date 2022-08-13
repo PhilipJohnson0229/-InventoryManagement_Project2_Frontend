@@ -110,7 +110,9 @@ export const Items = () => {
                 
                     <Fragment> {/*Resolves error of multiple children */}
                     <ItemsMap e={e} setTable={setTable} /> 
-                    <EditableRow/>
+                    <form>
+                        <EditableRow/>
+                    </form>
                     </Fragment>
                     
             ))}
