@@ -54,7 +54,7 @@ export const ItemsMap = ({e, setTable, handeEditClick}) => {
         <td>{e.store.name}</td>
         <td>{e.category.name}</td>
         <td>
-        <Button onClick={handeEditClick} variant='secondary'>Edit</Button>
+        <Button onClick={(event) => handeEditClick(event, e)} variant='secondary'>Edit</Button>
         <Button onClick={handleDelete} variant='dark'>Delete</Button>
         </td>
     </tr>
