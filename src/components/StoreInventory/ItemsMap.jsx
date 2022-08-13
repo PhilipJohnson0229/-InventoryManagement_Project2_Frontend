@@ -12,7 +12,7 @@ export const ItemsMap = ({e, setTable}) => {
 
     const handleDelete = async () => {
         try {                                 // Need to test 
-            const s = await axios.delete(`http://localhost:8080/deleteItem/{id}`);
+            const s = await axios.delete(`http://localhost:8080/items/deleteItem/{id}`);
              setTable(e.filter((table) => {return e.id !== table.id}));
          }
          catch (err) {

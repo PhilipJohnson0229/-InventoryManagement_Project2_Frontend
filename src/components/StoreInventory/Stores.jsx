@@ -13,7 +13,7 @@ export const Stores = () => {
     
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/getStores`)
+        axios.get(`http://localhost:8080/stores/getStores`)
         .then((response) => {console.log(response.data) 
             setCardInfo(response.data)})
         .catch((err) => {console.log(err)})

@@ -19,8 +19,8 @@ export const Items = () => {
     // retrieves table
     useEffect(() => {
         axios.all([ // calls each .get() below
-        axios.get(`http://localhost:8080/getItems?page=${page}`), // tables that takes in pagination - page
-        axios.get(`http://localhost:8080/getAll`)]).then(axios.spread((getItems, getAll) => { // 'getAll' 
+        axios.get(`http://localhost:8080/items/getItems?page=${page}`), // tables that takes in pagination - page
+        axios.get(`http://localhost:8080/items/getItemsNoPage`)]).then(axios.spread((getItems, getAll) => { // 'getAll' 
             setTable(getItems.data); // store the data
             setAllTable(getAll.data);
             console.log("paged items: ", getItems.data, "all items: ", getAll.data); // outputs data
