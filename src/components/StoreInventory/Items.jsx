@@ -87,6 +87,10 @@ export const Items = () => {
 
     const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
 
+    const handeEditClick = (event, e) => {
+        event.preventDefault();
+        setEditItemId(e.id);
+    }
 
  // Bare bones Items table setup, still need to alter
     return (
@@ -115,7 +119,8 @@ export const Items = () => {
                 <Fragment> {/*Fragment resolves error of multiple children */}
                     {editItemId === e.id ? (
                     <EditableRow/>) : (
-                    <ItemsMap e={e} setTable={setTable} />
+                    <ItemsMap e={e} setTable={setTable} 
+                    handeEditClick={handeEditClick}/>
                     )}
                 </Fragment>
                     
