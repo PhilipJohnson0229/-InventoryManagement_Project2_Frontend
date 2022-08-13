@@ -1,13 +1,11 @@
-import React from 'react';
+import React from "react";
 import axios from 'axios';
 import { Container, Table, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemsMap } from './ItemsMap';
 import { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
 
-export const Items = () => {
-
+function Jaxnation(){
     const [table, setTable] = useState([]); // maps table
     const [allTable, setAllTable] = useState([]);
     //stores the search result
@@ -83,11 +81,9 @@ export const Items = () => {
     const updatePage = (page) => { // updates pagination
         setPage(page);
     }
-
- // Bare bones Items table setup, still need to alter
-    return (
-    <>
-    <Container className="text-center"  style={{paddingTop: 30}}>
+    return(
+        <div>
+            <Container className="text-center"  style={{paddingTop: 30}}>
     <input type="text" id="storeInput" onChange={searchResult} placeholder="Search for store names.."></input>
     <input type="text" id="categoryInput" onChange={searchCategoryResult} placeholder="Search for category names.."></input>
 
@@ -126,6 +122,8 @@ export const Items = () => {
   </ul>
 </nav>
     </Container>
-    </>
-    );
+        </div>
+    )
 }
+
+export default Jaxnation;

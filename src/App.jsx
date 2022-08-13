@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Home } from './components/StoreInventory/Home';
 import { Items } from './components/StoreInventory/Items';
 import { Stores } from './components/StoreInventory/Stores';
+import Jaxnation from "./components/StoreInventory/Jaxnation";
+import DynamicPage from "./components/StoreInventory/DynamicPage";
 
 function App() {
   return (
@@ -20,11 +22,16 @@ function App() {
       <div className='nav-item'>
         <Link className='nav-item' to="/table">Items</Link>
       </div>
+      <div className='nav-item'>
+        <Link className='nav-item' to="/table/Jaxnation">Jaxnation</Link>
+      </div>
     </section>
     </NavBar>
     <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/table" element={<Items/>}/>
+        <Route path="/table/Jaxnation" element={<Jaxnation/>}/>
+        <Route path="/table/:id" element={<DynamicPage/>}/>
         <Route path="/cards" element={<Stores/>}/>
     </Routes>
     </BrowserRouter>
