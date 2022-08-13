@@ -113,7 +113,10 @@ export const Items = () => {
             {result.map((e) =>(
                 
                 <Fragment> {/*Fragment resolves error of multiple children */}
-                    {editItemId === e.id ? <EditableRow/> : <ItemsMap e={e} setTable={setTable} />}
+                    {editItemId === e.id ? (
+                    <EditableRow/>) : (
+                    <ItemsMap e={e} setTable={setTable} />
+                    )}
                 </Fragment>
                     
             ))}
