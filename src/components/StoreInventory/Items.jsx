@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import axios from 'axios';
 import { Container, Table, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemsMap } from './ItemsMap';
+import { EditableRow } from './EditableRow';
 import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 
@@ -107,7 +108,7 @@ export const Items = () => {
             
             {result.map((e) =>(
                 <ItemsMap e={e} setTable={setTable} /> 
-                    
+                    <EditableRow/>
             ))}
 
         </tbody>
