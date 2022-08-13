@@ -85,6 +85,9 @@ export const Items = () => {
         setPage(page);
     }
 
+    const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
+
+
  // Bare bones Items table setup, still need to alter
     return (
     <>
