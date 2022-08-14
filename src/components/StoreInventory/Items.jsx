@@ -82,7 +82,7 @@ export const Items = () => {
     const updatePage = (page) => { // updates pagination
         setPage(page);
     }
-   
+   // may not need/ use axios call for edit
     const [editFormData, setEditFormData] = useState({
         id: "",
         name: "",
@@ -137,7 +137,7 @@ export const Items = () => {
         }
         setEditFormData(formValues);
     };
-
+    // should use update/save axios call
     const handleEditFormSubmit = (event) => {
         event.preventDefault();
 
