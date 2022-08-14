@@ -90,27 +90,52 @@ export const Items = () => {
         "name": "",
         "price": "",
         "store": {
-            "id": 2,
+            //"id": "",
             "name": "",
-            "location": "3744 Loftsgordon Street"
+            //"location": "3744 Loftsgordon Street"
         },
         "category": {
-            "id": 8,
+            //"id": 8,
             "name": "",
-            "description": "Mtrcy driver injured in collision w rail trn/veh in traf"
+            //"description": "Mtrcy driver injured in collision w rail trn/veh in traf"
         }
     })
 
     const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
 
     const handleEditFormChange = (event) => {
+        event.preventDefault();
 
+        const fieldName = event.target.getAttribute("name");
+        const fieldValue = event.target.value;
+
+        const newFormData = { ...editFormData};
+        newFormData[fieldName] = fieldValue;
+
+        setEditFormData(newFormData); // stores new edits to a rows
     }
-    
+
     const handeEditClick = (event, e) => {
         event.preventDefault();
         setEditItemId(e.id);
-    }
+
+        const formValues = {
+        id: e.id,
+        name: e.name,
+        price: "",
+        store: {
+            //"id": 2,
+            name: e.store.name,
+            //"location": "3744 Loftsgordon Street"
+        },
+        category: {
+            //"id": 8,
+            name: e.category.name,
+            //"description": "Mtrcy driver injured in collision w rail trn/veh in traf"
+        }
+        }
+        setEditFormData(formValues);
+    };
 
  // Bare bones Items table setup, still need to alter
     return (
@@ -138,7 +163,10 @@ export const Items = () => {
                 
                 <Fragment> {/*Fragment resolves error of multiple children */}
                     {editItemId === e.id ? (
-                    <EditableRow/>) : (
+                    <EditableRow 
+                    editFormData={editFormData} 
+                    handleEditFormChange={handleEditFormChange}/>
+                    ) : (
                     <ItemsMap e={e} setTable={setTable} 
                     handeEditClick={handeEditClick}/>
                     )}
