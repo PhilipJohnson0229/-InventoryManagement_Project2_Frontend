@@ -162,7 +162,7 @@ export const Items = () => {
     const handleCancelClick = () => {
         setEditItemId(null);
     }
- // Bare bones Items table setup, still need to alter
+ 
     return (
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
