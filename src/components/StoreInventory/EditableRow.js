@@ -53,6 +53,9 @@ export const EditableRow = ({editFormData, handleEditFormChange}) => {
             onChange={handleEditFormChange}
             </input>
         </td>
+        <td>
+            <button type="submit">Save</button>
+        </td>
     </tr>
   )
 }
