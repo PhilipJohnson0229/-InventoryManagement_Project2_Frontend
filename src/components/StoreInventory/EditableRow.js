@@ -1,6 +1,6 @@
 import React from 'react'
-                            //{editFormData, handleEditFormChange}
-export const EditableRow = () => {
+                            // desctrucutre 
+export const EditableRow = ({editFormData, handleEditFormChange, handleCancelClick}) => {
   return (
     <tr>
         <td>
@@ -8,9 +8,10 @@ export const EditableRow = () => {
             type="text" 
             required="required" 
             placeholder='Enter an id...' 
-            name="changeId">
-            {/*value={editFormData.id}*/}
-            {/*onChange={handleEditFormChange} */}
+            name="changeId"
+            value={editFormData.id}
+            onChange={handleEditFormChange}
+            >
             </input>
         </td>
         <td>
@@ -18,9 +19,11 @@ export const EditableRow = () => {
             type="text" 
             required="required" 
             placeholder='Enter a item name...' 
-            name="changeName">
-            {/*value={editFormData.name} */}
-            {/*onChange={handleEditFormChange} */}
+            name="changeName"
+            value={editFormData.name} 
+            onChange={handleEditFormChange} 
+            >
+            
             </input>
         </td>
         <td>
@@ -28,9 +31,10 @@ export const EditableRow = () => {
             type="text" 
             required="required" 
             placeholder='Enter an price...' 
-            name="changePrice">
-            {/* value={editFormData.price}*/}
-            {/* onChange={handleEditFormChange}*/}
+            name="changePrice"
+            value={editFormData.price}
+            onChange={handleEditFormChange}
+            >
             </input>
         </td>
         <td>
@@ -38,23 +42,26 @@ export const EditableRow = () => {
             type="text" 
             required="required" 
             placeholder='Enter a store name...' 
-            name="changeStoreName">
-            {/*value={editFormData.store.name} */}
-            {/*onChange={handleEditFormChange} */}
+            name="changeStoreName"
+            value={editFormData.store.name}
+            onChange={handleEditFormChange}
+            >
             </input>
-        </td>
+        </td> 
         <td>
             <input 
             type="text" 
             required="required" 
             placeholder='Enter a category...' 
-            name="changeCategoryName">
-            {/* value={editFormData.category.name}*/}
-            {/*onChange={handleEditFormChange} */}
+            name="changeCategoryName"
+            value={editFormData.category.name}
+            onChange={handleEditFormChange}
+            >
             </input>
         </td>
         <td>
             <button type="submit">Save</button>
+            <button type="button" onClick={handleCancelClick}>Cancel</button>
         </td>
     </tr>
   )

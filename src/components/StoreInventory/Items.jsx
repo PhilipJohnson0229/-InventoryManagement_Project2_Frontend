@@ -60,7 +60,6 @@ export const Items = () => {
             console.log("search results: ", currentResults, query);
             setResult(currentResults);
         }
-
     }
 
     const searchCategoryResult = (e) => {
@@ -78,14 +77,12 @@ export const Items = () => {
             console.log("search results: ", currentResults);
             setResult(currentResults);
         }
-
     }
 
     const updatePage = (page) => { // updates pagination
         setPage(page);
     }
-
-    
+   
     const [editFormData, setEditFormData] = useState({
         id: "",
         name: "",
@@ -103,7 +100,7 @@ export const Items = () => {
     }) 
 
     const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
-    
+     
     const handleEditFormChange = (event) => {
         event.preventDefault();
 
@@ -113,34 +110,58 @@ export const Items = () => {
 
         // new object to prevent mutating the state
         const newFormData = { ...editFormData}; // used spread operator to copy the edited form data
-        newFormData[fieldName] = fieldValue; // name = whatever user inputs
+        newFormData[fieldName] = fieldValue; // name = whatever user inputs. Updates form data
 
         setEditFormData(newFormData); // stores new edits to a rows
     }
 
+    // Prepopulates the form to the current data
     const handeEditClick = (event, e) => {
         event.preventDefault();
         setEditItemId(e.id);
-        /*
+        
         const formValues = {
         id: e.id,
         name: e.name,
         price: e.price,
         store: {
-            "id": "",
+            id: "",
             name: e.store.name,
-            //"location": "3744 Loftsgordon Street"
+            location: ""
         },
         category: {
-            "id": "",
+            id: "",
             name: e.category.name,
-            "description": ""
+            description: ""
         }
         }
         setEditFormData(formValues);
-        */
     };
 
+    const handleEditFormSubmit = (event) => {
+        event.preventDefault();
+
+        const editedItem = {
+            id: editItemId,
+            name: editFormData.name,
+            price: editFormData.price,
+            storeName: editFormData.store.name,
+            categoryName: editFormData.category.name
+        }
+
+        const newResult = [...result];
+
+        const index = result.findIndex((item) => item.id === editItemId);
+
+        newResult[index] = editedItem;
+
+        setResult(newResult);
+        setEditItemId(null);
+    }
+
+    const handleCancelClick = () => {
+        setEditItemId(null);
+    }
  // Bare bones Items table setup, still need to alter
     return (
     <>
@@ -149,7 +170,7 @@ export const Items = () => {
     <input type="text" id="categoryInput" onChange={searchCategoryResult} placeholder="Search for category names.."></input>
 
     <Card variant='dark' style={{width: '100%', color:'white'}}>
-    <form>
+    <form onSubmit={handleEditFormSubmit}>
     <Table striped bordered hover size="sm" id="myTable" variant='info' responsive>
         <thead>
             <tr>
@@ -165,7 +186,10 @@ export const Items = () => {
             {result.map((e) =>(  
                 <Fragment> {/*Fragment resolves error of multiple children */}
                     {editItemId === e.id ? (
-                    <EditableRow/>
+                    <EditableRow 
+                    editFormData={editFormData} 
+                    handleEditFormChange={handleEditFormChange}
+                    handleCancelClick={handleCancelClick}/>
                     ) : (
                     <ItemsMap e={e} setTable={setTable} 
                     handeEditClick={handeEditClick}/>
