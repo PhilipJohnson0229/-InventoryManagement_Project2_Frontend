@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import gifImage from './b03b4afa764772ab1763c125890a9a0e.gif';
 /* This is the index/Welcome page
 */
 export const Home = () => {
@@ -13,7 +14,7 @@ export const Home = () => {
                
                     <Card bg="success" className="mb-3 text-center" style={{color:'white'}}>
                     <Card.Body>
-                    <Card.Img src="https://www.helium10.com/app/uploads/2020/09/InventoryManagement_Hero@3x.png" resizeMode="cover" style ={{width:600, height : 500}} />
+                    <Card.Img src={gifImage} object-fit="none" />
                     </Card.Body> 
                     </Card>
                        
