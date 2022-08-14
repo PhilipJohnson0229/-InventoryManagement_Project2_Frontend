@@ -3,16 +3,8 @@ import React from 'react'
 export const EditableRow = ({editFormData, handleEditFormChange, handleCancelClick}) => {
   return (
     <tr>
-        <td>
-            <input 
-            type="text" 
-            required="required" 
-            placeholder='Enter an id...' 
-            name="changeId"
-            value={editFormData.id}
-            onChange={handleEditFormChange}
-            >
-            </input>
+       <td>
+          {editFormData.id}
         </td>
         <td>
             <input 
