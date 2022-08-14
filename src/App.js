@@ -12,7 +12,8 @@ import {useState, useEffect} from 'react';
 import React from 'react';
 import axios from 'axios';
 import { useLocalState } from './util/UserLocalStorage';
-import ajax from './services/fetchService';
+
+
 
 function App() {
   const [show, setShow] = useState(false);
@@ -23,8 +24,6 @@ function App() {
   const [password, setPassword] = useState("");
   axios.defaults.withCredentials = true;
   const [jwt, setJwt] = useLocalState("", "jwt");
-  const [isLoading, setIsLoading] = useState(true);
-  const [isValid, setIsValid] = useState(null);
   const [loginMessage, setLoginMessage] = useState("");
   //const [errorMsg, setErrorMsg] = useState(null);
   
@@ -43,15 +42,6 @@ function App() {
 
 //we can leverage local storage to save the jwt for persistence through the app
 
-
-//stores state within the scope of this app function
-//thuis is basically an array with a getter and setter
-      //get //set     //what are we returning?: string
-
-
-
-     
-    
 const reqBody = {
   username: username,
   password: password,

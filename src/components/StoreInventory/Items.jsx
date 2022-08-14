@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react';
 import axios from 'axios';
-import { Container, Table, Card} from 'react-bootstrap';
+import { Container, Table, Card, Offcanvas, Button, ButtonGroup, DropdownButton, Dropdown} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemsMap } from './ItemsMap';
-import { EditableRow } from './EditableRow';
 import { useState, useEffect } from 'react';
+import { EditableRow } from './EditableRow';
 import { useLocation } from "react-router-dom";
 
 export const Items = () => {
@@ -17,6 +17,14 @@ export const Items = () => {
     //const location = useLocation();// for storing Store name from Store component
     //const { storeName } = location.state;
 
+    /*************************Add Item***************************/
+    
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    /*************************Add Item***************************/
+
     // retrieves table
     useEffect(() => {
         axios.all([ // calls each .get() below
@@ -24,10 +32,10 @@ export const Items = () => {
         axios.get(`http://localhost:8080/items/getItemsNoPage`)]).then(axios.spread((getItems, getAll) => { // 'getAll' 
             setTable(getItems.data); // store the data
             setAllTable(getAll.data);
-            console.log("paged items: ", getItems.data, "all items: ", getAll.data); // outputs data
+            //console.log("paged items: ", getItems.data, "all items: ", getAll.data); // outputs data
             //console.log(storeName); // output: "the-page-id"
         }))
-}, [page]) // every time update is changed -> useEffect hook is called again
+    }, [page]) // every time update is changed -> useEffect hook is called again
 
     // allows to render entire table pagination at beginning/refresh
     useEffect(() => { 
@@ -82,7 +90,8 @@ export const Items = () => {
     const updatePage = (page) => { // updates pagination
         setPage(page);
     }
-   // may not need/ use axios call for edit
+
+    // may not need/ use axios call for edit
     const [editFormData, setEditFormData] = useState({
         id: "",
         name: "",
@@ -162,7 +171,8 @@ export const Items = () => {
     const handleCancelClick = () => {
         setEditItemId(null);
     }
- 
+
+ // Bare bones Items table setup, still need to alter
     return (
     <>
     <Container className="text-center"  style={{paddingTop: 30}}>
@@ -201,17 +211,37 @@ export const Items = () => {
     </form>
     </Card>
     <nav aria-label="Page navigation example">
-  <ul class="pagination">
+    <ul class="pagination">
     <li class="page-item"><a class="page-link" >Previous</a></li>
     {[...Array(11)].map((x, i) => {
         return (
+            <>
             <li class="page-item"><button className="page-link" onClick={() => {updatePage(i)}}>{i+1}</button></li>
+            </>
         )
     })}
     <li class="page-item"><a class="page-link" >Next</a></li>
-  </ul>
-</nav>
+
+    {/*************************Add Item***************************/}
+    {!show && <Button variant="info" onClick={handleShow}>
+      Add Item
+    </Button>}
+    {show && <Button variant="secondary"onClick={handleClose}>
+      Hide
+    </Button>}
+    {/*************************Add Item***************************/}
+
+    </ul>
+    </nav>
     </Container>
+    {/*************************Add Item***************************/}
+    {show && <Container responsive>
+        <Card >
+            <PostForm/>
+        </Card>
+    </Container>}
+    
+    {/*************************Add Item***************************/}
     </>
     );
 }
