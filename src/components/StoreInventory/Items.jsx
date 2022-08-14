@@ -85,32 +85,35 @@ export const Items = () => {
         setPage(page);
     }
 
+    
     const [editFormData, setEditFormData] = useState({
-        "id": "",
-        "name": "",
-        "price": "",
-        "store": {
-            //"id": "",
-            "name": "",
-            //"location": "3744 Loftsgordon Street"
+        id: "",
+        name: "",
+        price: "",
+        store: {
+            id: "",
+            name: "",
+            location: ""
         },
-        "category": {
-            //"id": 8,
-            "name": "",
-            //"description": "Mtrcy driver injured in collision w rail trn/veh in traf"
+        category: {
+            id: "",
+            name: "",
+            description: ""
         }
-    })
+    }) 
 
     const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
-
+    
     const handleEditFormChange = (event) => {
         event.preventDefault();
 
+        // get filed name and value
         const fieldName = event.target.getAttribute("name");
         const fieldValue = event.target.value;
 
-        const newFormData = { ...editFormData};
-        newFormData[fieldName] = fieldValue;
+        // new object to prevent mutating the state
+        const newFormData = { ...editFormData}; // used spread operator to copy the edited form data
+        newFormData[fieldName] = fieldValue; // name = whatever user inputs
 
         setEditFormData(newFormData); // stores new edits to a rows
     }
@@ -118,23 +121,24 @@ export const Items = () => {
     const handeEditClick = (event, e) => {
         event.preventDefault();
         setEditItemId(e.id);
-
+        /*
         const formValues = {
         id: e.id,
         name: e.name,
-        price: "",
+        price: e.price,
         store: {
-            //"id": 2,
+            "id": "",
             name: e.store.name,
             //"location": "3744 Loftsgordon Street"
         },
         category: {
-            //"id": 8,
+            "id": "",
             name: e.category.name,
-            //"description": "Mtrcy driver injured in collision w rail trn/veh in traf"
+            "description": ""
         }
         }
         setEditFormData(formValues);
+        */
     };
 
  // Bare bones Items table setup, still need to alter
@@ -157,23 +161,17 @@ export const Items = () => {
                 <td>Action</td>
             </tr>
         </thead>
-        <tbody>
-            
-            {result.map((e) =>(
-                
+        <tbody>         
+            {result.map((e) =>(  
                 <Fragment> {/*Fragment resolves error of multiple children */}
                     {editItemId === e.id ? (
-                    <EditableRow 
-                    editFormData={editFormData} 
-                    handleEditFormChange={handleEditFormChange}/>
+                    <EditableRow/>
                     ) : (
                     <ItemsMap e={e} setTable={setTable} 
                     handeEditClick={handeEditClick}/>
                     )}
-                </Fragment>
-                    
+                </Fragment>           
             ))}
-
         </tbody>
     </Table>
     </form>
