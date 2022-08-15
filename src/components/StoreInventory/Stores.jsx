@@ -29,11 +29,7 @@ export const Stores = () => {
           <Button onClick={() => {navigate("/table")}} style={{width: 300, alignSelf: 'center', justifyContent: 'inherit', marginBottom: 50, color:'white'}} variant= 'info'>
             See Inventory
           </Button>
-          <Link
-          style={{width: 300, alignSelf: 'center', justifyContent: 'inherit', marginBottom: 50, color:'white'}} variant= 'info'
-            to={'/table'}
-            state={{storeName: cardInfo.name}}
-            >Click to see Store</Link>
+          
         </Card.Body>
       </Card>
     );
