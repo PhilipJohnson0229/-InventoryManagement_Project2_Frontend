@@ -13,7 +13,7 @@ export const EditableRow = ({editFormData, handleEditFormChange, handleCancelCli
             placeholder='Enter a item name...' 
             name="changeName"
             value={editFormData.name} 
-            onChange={handleEditFormChange} 
+            onChange={(e) => handleEditFormChange(e.target.value)} 
             >
             
             </input>

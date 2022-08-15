@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ItemsMap } from './ItemsMap';
 import { useState, useEffect } from 'react';
 import { EditableRow } from './EditableRow';
+import PostForm from '../PostForm';
 import { useLocation } from "react-router-dom";
 
 export const Items = () => {
@@ -91,6 +92,21 @@ export const Items = () => {
         setPage(page);
     }
 
+    const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
+     
+    const handleEditFormChange = (event) => {
+        event.preventDefault();
+
+        // get filed name and value
+        const fieldName = event.target.getAttribute("name");
+        const fieldValue = event.target.value;
+
+        // new object to prevent mutating the state
+        const newFormData = { ...editFormData}; // used spread operator to copy the edited form data
+        newFormData[fieldName] = fieldValue; // name = whatever user inputs. Updates form data
+
+        setEditFormData(newFormData); // stores new edits to a rows
+    }
     // may not need/ use axios call for edit
     const [editFormData, setEditFormData] = useState({
         id: "",
@@ -107,23 +123,6 @@ export const Items = () => {
             description: ""
         }
     }) 
-
-    const [editItemId, setEditItemId] = useState(null); // set null -> user isn't editing a row
-     
-    const handleEditFormChange = (event) => {
-        event.preventDefault();
-
-        // get filed name and value
-        const fieldName = event.target.getAttribute("name");
-        const fieldValue = event.target.value;
-
-        // new object to prevent mutating the state
-        const newFormData = { ...editFormData}; // used spread operator to copy the edited form data
-        newFormData[fieldName] = fieldValue; // name = whatever user inputs. Updates form data
-
-        setEditFormData(newFormData); // stores new edits to a rows
-    }
-
     // Prepopulates the form to the current data
     const handeEditClick = (event, e) => {
         event.preventDefault();
@@ -147,22 +146,26 @@ export const Items = () => {
         setEditFormData(formValues);
     };
     // should use update/save axios call
-    const handleEditFormSubmit = (event) => {
+    const handleEditFormSubmit = async (event) => {
         event.preventDefault();
-
-        const editedItem = {
-            id: editItemId,
-            name: editFormData.name,
-            price: editFormData.price,
-            storeName: editFormData.store.name,
-            categoryName: editFormData.category.name
+        try{
+             await axios.post('http://localhost:8080/items/update',{
+                
+                    id: editItemId,
+                    name: editFormData.name,
+                    price: editFormData.price,
+                    storeName: editFormData.store.name,
+                    categoryName: editFormData.category.name
+                
+            });
+        }catch(error){
+            console.log(error)
         }
 
         const newResult = [...result];
 
-        const index = result.findIndex((item) => item.id === editItemId);
-
-        newResult[index] = editedItem;
+        //const index = result.findIndex((item) => item.id === editItemId);
+        //newResult[index] = editedItem;
 
         setResult(newResult);
         setEditItemId(null);
