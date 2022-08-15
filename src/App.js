@@ -28,12 +28,6 @@ function App() {
   //const [errorMsg, setErrorMsg] = useState(null);
   
   //Validation
-
-  
-  // useEffect(() => {
-  //   if (user.jwt) navigate("/dashboard");
-  // }, [user]);
-
   
   const errorMsg = "";
   
@@ -56,9 +50,7 @@ try{
       setJwt(response.headers['authorization']);
       setShow(false);
       if (response.status === 200) {
-
-        
-        return response.text();
+        return response.text;
       }
       else if (response.status === 401 || response.status === 403) {
         errorMsg = "Invalid username or password";
@@ -69,7 +61,7 @@ try{
   }
   }
   catch (err) {
-    //console.error(err);
+    console.error(err);
   } 
 }
 
@@ -80,7 +72,7 @@ useEffect(()=>{
   }
   else
   {
- /*ajax(`http://localhost:8080/auth/validate?token=${jwt}`,"get", jwt).then((isValid) => {
+  /*ajax(`http://localhost:8080/auth/validate?token=${jwt}`,"get", jwt).then((isValid) => {
     
     setIsValid(isValid);
     setIsLoading(false);
@@ -90,21 +82,29 @@ useEffect(()=>{
                 setIsLoading(false);
   }); 
   */
-  
   setLoginMessage("Authenticated");   
   setTimeout(setShowLoginMessage(false), 2000);
   }
  
 },[jwt]);
 
-
-
-
+const handleLogout = async (event) => {
+  if(jwt){
+    const e = await axios.get('http://localhost:8080/auth/logout', reqBody)
+    .then((response) => {
+      setJwt("");
+      if (response.status === 200) {
+        return response.text;
+      }
+      else {
+        errorMsg =  "Something went wrong";
+      }
+    });
+  }
+}
 // hooks allow us to reach into the rendering engine and tell react when code should and should not run
 //takes in function and a dependency array
 //the empty array means this will run once on load
-
-
 
 /*********************LOGIN***********************/
 
@@ -123,10 +123,11 @@ return (
       <Link className='nav-item' to="/table">Items</Link>
     </div>   
   </section>
-  <section style={{paddingRight: 40}}>{showLoginMessage && <Button variant="info" onClick={handleShow}>
+  <section style={{paddingRight: 40}}>
+    {showLoginMessage && <Button variant="info" onClick={handleShow}>
       Login
     </Button>}
-    {!showLoginMessage && <Button variant="secondary">
+    {!showLoginMessage && <Button variant="secondary" onClick={handleLogout}>
       Logout
     </Button>}
     </section>

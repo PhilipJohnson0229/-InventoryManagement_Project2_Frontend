@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios';
 
 export default class App extends Component {
-  constructor(props) {
+  
+    constructor(props) {
     super(props);
     this.state = {
       id: "0",
@@ -23,8 +24,8 @@ export default class App extends Component {
       [name]: value
     })
   }
+
   onHandleSubmit = async (event) => {
-    event.preventDefault();
     console.log(this.state);
     try{
         await axios.post('http://localhost:8080/items/addItem', {
@@ -38,9 +39,9 @@ export default class App extends Component {
         });
     }catch(error){
         console.log(error)
-    }
-    
+    }    
   }
+
   render() {
     return (
       <div className="container mt-5">
@@ -90,10 +91,7 @@ export default class App extends Component {
                 </div>
                 {/* category */}
 
-
                 <button type="submit" className="btn btn-primary">Save</button>
-                <button type="reset" className="btn btn-warning">Reset</button>
-               
               </form>
             </div>
           </div>
