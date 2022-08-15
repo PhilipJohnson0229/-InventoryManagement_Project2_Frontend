@@ -82,6 +82,7 @@ export default class EditForm extends Component {
             onChange={this.handleEditFormData}
             >
             </input>
+            
         </td> 
         <td>
             <input 
